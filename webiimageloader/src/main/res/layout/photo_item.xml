@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="7dp"
+        app:cardElevation="20dp"
+        app:cardCornerRadius="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.johnwebi.webiimageloader.ImageView.WebiImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/img"
+                android:scaleType="centerCrop"
+                android:transitionName="img"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:id="@+id/shadow_bottom"
+                android:layout_alignBottom="@id/img"
+                android:src="@drawable/bottom_shadow"
+                android:layout_height="80dp" />
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/progress_loading_photo"
+                android:layout_marginTop="70dp"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>
