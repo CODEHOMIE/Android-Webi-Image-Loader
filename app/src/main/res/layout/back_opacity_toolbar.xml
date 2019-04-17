@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="@drawable/top_bottom_shadow"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="18dp"
+        >
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:id="@+id/backBtnIv"
+            android:padding="12dp"
+            android:src="@drawable/back_btn"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="4dp"
+            android:layout_toRightOf="@+id/backBtnIv"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/userProfileAvatarIv"
+            android:src="@drawable/placeholder_img"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/userProfileAvatarIv"
+            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+           >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:id="@+id/userNameTv"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                android:text=""/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/userNameTv"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="11dp"
+                android:id="@+id/createdAtTv"
+                android:text=""/>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
