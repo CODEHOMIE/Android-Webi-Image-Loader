@@ -12,6 +12,8 @@ import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
 
+import com.johnwebi.webiimageloader.Utils.lrucache.LruMemCache;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -46,7 +48,7 @@ public class WebiImageLoader extends NetworkLoader {
             if (context == null) {
                 throw new RuntimeException("Context is null");
             }
-            final Bitmap bitmap = MemoryCache.getInstance().getItem(request.url().toString());
+            final Bitmap bitmap = LruMemCache.getInstance().getItem(request.url().toString());
             if (bitmap != null) {
                 if (context instanceof Activity) {
                     final Activity activity = ((Activity) context);
@@ -88,7 +90,7 @@ public class WebiImageLoader extends NetworkLoader {
                                 if (response.body() != null) {
                                     inputStream = response.body().byteStream();
                                     final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                                    MemoryCache.getInstance().addItem(request.url().toString(), bitmap);
+                                    LruMemCache.getInstance().addItem(request.url().toString(), bitmap);
                                     if (context instanceof Activity) {
                                         final Activity activity = ((Activity) context);
                                         activity.runOnUiThread(new Runnable() {

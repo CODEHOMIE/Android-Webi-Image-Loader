@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
+import com.johnwebi.webiimageloader.Utils.WebiImageLoader;
 import com.johnwebi.webiimageloaderexample.Activities.OnClickPhotoActivity;
 import com.johnwebi.webiimageloaderexample.Models.Photo;
 import com.johnwebi.webiimageloaderexample.Models.Urls;
@@ -41,10 +40,12 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
         final PhotoViewHolder holder = photoViewHolder;
         final Photo model = photoList.get(i);
 
-        Glide.with(context)
+        new WebiImageLoader.Builder()
+                .from(context)
                 .load(model.getUrls().getFull())
-                .into(holder.imageView);
-
+                .placeHolder(R.drawable.placeholder_img)
+                .into(holder.imageView)
+                .build();
 
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {

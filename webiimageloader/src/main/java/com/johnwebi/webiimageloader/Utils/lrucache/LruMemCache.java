@@ -1,4 +1,4 @@
-package com.johnwebi.webiimageloader.Utils;
+package com.johnwebi.webiimageloader.Utils.lrucache;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
@@ -6,28 +6,28 @@ import android.support.v4.util.LruCache;
 
 import java.io.Serializable;
 
-public final class MemoryCache implements Serializable {
-    private static volatile MemoryCache INSTANCE;
+public final class LruMemCache implements Serializable {
+    private static volatile LruMemCache INSTANCE;
 
     private LruCache<String, Bitmap> memCache;
 
-    private MemoryCache() {
+    private LruMemCache() {
         if (INSTANCE != null) {
             throw new RuntimeException("Use getInstance() method to get the single instance of this class.");
         }
     }
 
-    public static MemoryCache getInstance() {
+    public static LruMemCache getInstance() {
         if (INSTANCE == null) {
-            synchronized (MemoryCache.class) {
-                INSTANCE = new MemoryCache();
+            synchronized (LruMemCache.class) {
+                INSTANCE = new LruMemCache();
             }
         }
         return INSTANCE;
     }
 
     //Make singleton from serialize and deserialize operation.
-    protected MemoryCache readResolve() {
+    protected LruMemCache readResolve() {
         return getInstance();
     }
 

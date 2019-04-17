@@ -9,10 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestOptions;
+import com.johnwebi.webiimageloader.Utils.WebiImageLoader;
 import com.johnwebi.webiimageloaderexample.R;
 import com.johnwebi.webiimageloaderexample.Utils.Utils;
 
@@ -84,19 +81,19 @@ public class OnClickPhotoActivity extends AppCompatActivity {
     }
 
     public void SetArticleImage() {
-        //Randomly set placeholder image photo
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(Utils.getRandomDrawbleColor());
-        requestOptions.error(Utils.getRandomDrawbleColor());
-        requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
-        requestOptions.centerCrop();
 
-        Glide.with(getApplicationContext())
+        new WebiImageLoader.Builder()
+                .from(getApplicationContext())
                 .load(url)
-                .into(photoImage);
+                .placeHolder(R.drawable.placeholder_img)
+                .into(photoImage)
+                .build();
 
-        Glide.with(getApplicationContext())
+        new WebiImageLoader.Builder()
+                .from(getApplicationContext())
                 .load(profileUrl)
-                .into(userProfileAvatar);
+                .placeHolder(R.drawable.placeholder_img)
+                .into(userProfileAvatar)
+                .build();
     }
 }
