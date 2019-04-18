@@ -53,6 +53,11 @@ public final class LruMemCache implements Serializable {
     }
 
     public Bitmap getItem(String key) {
+        if (memCache == null)
+            initCache(4 * 1024 * 1024);
+        if (key == null )
+            return null;
+
         return memCache.get(key);
     }
 }
