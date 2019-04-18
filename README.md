@@ -30,7 +30,7 @@ Up to now, the library is only available in JitPack. Please add this code to you
           ...
           ImageView imageView = (ImageView) findViewById(R.id.my_image_view);
 
-          WebiImageLoader.with(this).load("http://goo.gl/gEgYUd").into(imageView);
+          WebiImageLoader.Builder().from(this).load("http://goo.gl/gEgYUd").into(imageView);
         }
 
         // For a simple image list:
@@ -44,10 +44,12 @@ Up to now, the library is only available in JitPack. Please add this code to you
 
           String url = myUrls.get(position);
 
-          WebiImageLoader
+          WebiImageLoader.Builder()
+                        .from(this)
                         .load(url)
                         .placeHolder(R.drawable.loading_spinner)
-                        .into(myImageView);
+                        .into(myImageView)
+                        .build();
 
           return myImageView;
         }
