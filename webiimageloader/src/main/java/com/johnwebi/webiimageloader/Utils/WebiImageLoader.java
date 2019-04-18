@@ -1,6 +1,7 @@
 package com.johnwebi.webiimageloader.Utils;
 
 import android.app.Activity;
+import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -8,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.os.Handler;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
@@ -91,9 +93,10 @@ public class WebiImageLoader extends NetworkLoader {
                                     inputStream = response.body().byteStream();
                                     final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                                     LruMemCache.getInstance().addItem(request.url().toString(), bitmap);
-                                   // if (context instanceof Activity) {
-                                        final Activity activity = ((Activity) context);
-                                        activity.runOnUiThread(new Runnable() {
+                                    if (context instanceof Activity) {
+                                        final Application activity = ((Application) context);
+                                        final Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
                                             @Override
                                             public void run() {
                                                 if (progressListener != null)
@@ -105,12 +108,11 @@ public class WebiImageLoader extends NetworkLoader {
                                                         });
                                                 imageView.setImageBitmap(bitmap);
                                                 imageView.setImageDrawable(td);
-                                                td.startTransition(500);
                                             }
-                                        });
-                                    /*} else {
+                                        }, 500);
+                                    } else {
                                         throw new RuntimeException("Invalid context passed.");
-                                    }*/
+                                    }
                                 }
                             }
                         });
