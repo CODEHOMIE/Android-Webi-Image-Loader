@@ -52,7 +52,14 @@ public class WebiImageLoader extends NetworkLoader {
             }
             final Bitmap bitmap = LruMemCache.getInstance().getItem(request.url().toString());
             if (bitmap != null) {
-                if (context instanceof Activity) {
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageView.setImageBitmap(bitmap);
+                    }
+                });
+                /*if (context instanceof Activity) {
                     final Activity activity = ((Activity) context);
                     activity.runOnUiThread(new Runnable() {
                         @Override
@@ -62,7 +69,7 @@ public class WebiImageLoader extends NetworkLoader {
                     });
                 } else {
                     throw new RuntimeException("Invalid context passed.");
-                }
+                }*/
             } else {
                 if (progressListener != null)
                     progressListener.onRequestStarted();
@@ -71,8 +78,18 @@ public class WebiImageLoader extends NetworkLoader {
                             @Override
                             public void onFailure(Call call, final IOException e) {
                                 e.printStackTrace();
-                                if (context instanceof Activity) {
-                                    final Activity activity = ((Activity) context);
+                                Handler handler = new Handler();
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (progressListener != null)
+                                            progressListener.onError(e);
+                                        imageView.setImageDrawable(context.getResources().getDrawable(placeHolderDrawable));
+                                    }
+                                });
+                               /* if (context instanceof Activity) {
+
+                                    *//*final Activity activity = ((Activity) context);
                                     activity.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -80,10 +97,10 @@ public class WebiImageLoader extends NetworkLoader {
                                                 progressListener.onError(e);
                                             imageView.setImageDrawable(activity.getResources().getDrawable(placeHolderDrawable));
                                         }
-                                    });
+                                    });*//*
                                 } else {
                                     throw new RuntimeException("Invalid context passed.");
-                                }
+                                }*/
                             }
 
                             @Override
@@ -93,7 +110,22 @@ public class WebiImageLoader extends NetworkLoader {
                                     inputStream = response.body().byteStream();
                                     final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                                     LruMemCache.getInstance().addItem(request.url().toString(), bitmap);
-                                    if (context instanceof Activity) {
+                                    Handler handler = new Handler();
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (progressListener != null)
+                                                progressListener.onRequestComplete();
+                                            final TransitionDrawable td =
+                                                    new TransitionDrawable(new Drawable[]{
+                                                            new ColorDrawable(Color.TRANSPARENT),
+                                                            new BitmapDrawable(context.getResources(), bitmap)
+                                                    });
+                                            imageView.setImageBitmap(bitmap);
+                                            imageView.setImageDrawable(td);
+                                        }
+                                    });
+                                    /*if (context instanceof Application) {
                                         final Application activity = ((Application) context);
                                         final Handler handler = new Handler();
                                         handler.postDelayed(new Runnable() {
@@ -112,7 +144,7 @@ public class WebiImageLoader extends NetworkLoader {
                                         }, 500);
                                     } else {
                                         throw new RuntimeException("Invalid context passed.");
-                                    }
+                                    }*/
                                 }
                             }
                         });
