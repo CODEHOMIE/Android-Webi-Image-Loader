@@ -83,14 +83,14 @@ public class OnClickPhotoActivity extends AppCompatActivity {
     public void SetArticleImage() {
 
         new WebiImageLoader.Builder()
-                .from(getApplicationContext())
+                .from(this)
                 .load(url)
                 .placeHolder(R.drawable.placeholder_img)
                 .into(photoImage)
                 .build();
 
         new WebiImageLoader.Builder()
-                .from(getApplicationContext())
+                .from(this)
                 .load(profileUrl)
                 .placeHolder(R.drawable.placeholder_img)
                 .into(userProfileAvatar)

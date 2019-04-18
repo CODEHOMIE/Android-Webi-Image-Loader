@@ -14,6 +14,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -71,22 +72,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void OnGithubFabClick() {
-        githubFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpenIntent(HTTPS_GITHUB_COM_JOHNWEBI, GITHUB);
-            }
-        });
-
+        onClickFab(githubFab, HTTPS_GITHUB_COM_JOHNWEBI, GITHUB);
     }
 
     private void OnTwitterFabClick() {
-        twitterFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpenIntent(HTTPS_TWITTER_COM_JOHNSWEBI, TWITTER);
-            }
-        });
+        onClickFab(twitterFab, HTTPS_TWITTER_COM_JOHNSWEBI, TWITTER);
     }
 
     private void OpenAnimationFab() {
@@ -94,6 +84,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             @Override
             public void onClick(View v) {
                 AnimateFAB();
+            }
+        });
+    }
+
+    private void onClickFab(FloatingActionButton fabButton, final String url, final String pageTitle) {
+        fabButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenIntent(url, pageTitle);
             }
         });
     }

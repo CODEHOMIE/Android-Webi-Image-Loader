@@ -1,5 +1,6 @@
 package com.johnwebi.webiimageloaderexample.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -43,9 +44,9 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
         new WebiImageLoader.Builder()
                 .from(context)
                 .load(model.getUrls().getFull())
-                //.placeHolder(R.drawable.placeholder_img)
-                .into(holder.imageView)
-                .build();
+                .placeHolder(R.drawable.placeholder_img)
+                .into(holder.imageView);
+                //.build();
 
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
