@@ -45,8 +45,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
                 .from(context)
                 .load(model.getUrls().getFull())
                 .placeHolder(R.drawable.placeholder_img)
-                .into(holder.imageView);
-                //.build();
+                .into(holder.imageView)
+                .build();
 
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
