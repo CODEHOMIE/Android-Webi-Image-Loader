@@ -91,7 +91,7 @@ public class WebiImageLoader extends NetworkLoader {
                                     inputStream = response.body().byteStream();
                                     final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                                     LruMemCache.getInstance().addItem(request.url().toString(), bitmap);
-                                    if (context instanceof Activity) {
+                                   // if (context instanceof Activity) {
                                         final Activity activity = ((Activity) context);
                                         activity.runOnUiThread(new Runnable() {
                                             @Override
@@ -108,9 +108,9 @@ public class WebiImageLoader extends NetworkLoader {
                                                 td.startTransition(500);
                                             }
                                         });
-                                    } else {
+                                    /*} else {
                                         throw new RuntimeException("Invalid context passed.");
-                                    }
+                                    }*/
                                 }
                             }
                         });

@@ -51,7 +51,7 @@ dependencies {
 
     //IMAGE LIBS
     implementation 'de.hdodenhof:circleimageview:3.0.0'
-    implementation 'com.github.johnwebi:Android-Webi-Image-Loader:v1.1'
+    implementation 'com.github.johnwebi:Android-Webi-Image-Loader:v1.0-alpha'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
